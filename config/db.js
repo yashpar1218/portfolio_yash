@@ -3,6 +3,9 @@ const util = require('util');
 const fs = require('fs');
 const path = require('path');
 
+const caPath = process.env.DB_CA_PATH ||
+    path.join(__dirname, '../certs/ca.pem');
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
