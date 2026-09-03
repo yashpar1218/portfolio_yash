@@ -1,0 +1,55 @@
+<%- include('header.ejs') %>
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h3 mb-1">Edit Blog Post</h1>
+        <p class="text-muted small mb-0">Update your article content and image</p>
+      </div>
+      <a href="/admin/blog_manage" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-arrow-left me-1"></i> Back to Blog Posts
+      </a>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <form action="/admin/update_blog/<%= blog.b_id %>" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="old_photo" value="<%= blog.post_photo %>">
+              
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Post Title</label>
+                <input type="text" name="post_name" class="form-control" value="<%= blog.post_name %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Description / Summary</label>
+                <textarea name="post_des" class="form-control" rows="4" required><%= blog.post_des %></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Post Header Image</label>
+                <% if (blog.post_photo) { %>
+                  <div class="mb-2">
+                    <img src="/<%= blog.post_photo %>" alt="Current Image" class="rounded shadow-sm" style="max-height: 120px; object-fit: cover;" />
+                  </div>
+                <% } %>
+                <input type="file" name="post_photo" class="form-control" accept="image/*" />
+                <small class="text-muted">Leave blank to keep existing image</small>
+              </div>
+
+              <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="/admin/blog_manage" class="btn btn-light">Cancel</a>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save me-1"></i> Update Post
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('footer.ejs') %>

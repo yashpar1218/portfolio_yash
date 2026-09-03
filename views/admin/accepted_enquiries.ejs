@@ -1,0 +1,45 @@
+<%- include('header.ejs'); %>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 mb-1">Accepted Enquiries</h1>
+                <p class="text-muted small mb-0">Accepted enquiries are preserved for your records.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body p-0">
+                <% if (enquiries.length === 0) { %>
+                    <div class="p-4 text-muted">No accepted enquiries yet.</div>
+                <% } else { %>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Accepted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% enquiries.forEach(function(item){ %>
+                                    <tr>
+                                        <td><%= item.name %></td>
+                                        <td><%= item.email %></td>
+                                        <td><%= item.subject || '-' %></td>
+                                        <td><%= item.message %></td>
+                                        <td><%= new Date(item.created_at).toLocaleString() %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('footer.ejs'); %>

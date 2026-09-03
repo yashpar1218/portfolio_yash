@@ -1,0 +1,48 @@
+<%- include('header.ejs'); %>
+
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-desc">Explore my showcase of web applications, mobile platforms, and software engineering projects</p>
+        </div>
+        
+        <!-- Filter Tabs -->
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                <% categories.forEach(cat => { %>
+                    <button class="filter-btn" data-filter="<%= cat.toLowerCase() %>"><%= cat %></button>
+                <% }) %>
+            <% } else { %>
+                <button class="filter-btn" data-filter="web app">Web Apps</button>
+            <% } %>
+        </div>
+        
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid">
+            <% if (port && port.length > 0) { %>
+                <% for (let i = 0; i < port.length; i++) { %>
+                    <div class="portfolio-item" data-category="<%= port[i].pr_cate %>">
+                        <% if (port[i].pr_photo) { %>
+                            <img src="/<%= port[i].pr_photo %>" alt="<%= port[i].pr_name %>" />
+                        <% } else { %>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&fit=crop" alt="Project" />
+                        <% } %>
+                        <div class="portfolio-overlay">
+                            <h3><%= port[i].pr_name %></h3>
+                            <p><%= port[i].pr_cate %></p>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <div class="text-center w-100 py-5 text-muted">
+                    <p>No projects uploaded yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

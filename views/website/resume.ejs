@@ -1,0 +1,75 @@
+<%- include('header.ejs'); %>
+
+<section id="resume" class="resume">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Resume</span>
+            <h2 class="section-title">Skills & Experience</h2>
+            <p class="section-desc">A snapshot of technical capabilities, professional milestones, and academic degree</p>
+        </div>
+        
+        <div class="resume-grid">
+            <!-- Technical Skills -->
+            <div class="skills-container">
+                <h3>Technical Skills</h3>
+                <% if (skill && skill.length > 0) { %>
+                    <% for (let i = 0; i < skill.length; i++) { %>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name"><%= skill[i].tech_name %></span>
+                                <span class="skill-percent"><%= skill[i].tech_per %>%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-width="<%= skill[i].tech_per %>"></div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <p class="text-muted">No skills listed yet.</p>
+                <% } %>
+            </div>
+            
+            <!-- Experience & Education Timeline -->
+            <div class="timeline-container">
+                <h3>Work Experience</h3>
+                <div class="timeline">
+                    <% if (experience && experience.length > 0) { %>
+                        <% for (let i = 0; i < experience.length; i++) { %>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date"><%= experience[i].exp_dur %></span>
+                                    <h4><%= experience[i].exp_pos %></h4>
+                                    <p class="timeline-company"><%= experience[i].exp_com %></p>
+                                    <p><%= experience[i].exp_des %></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p class="text-muted">No work experience entries listed.</p>
+                    <% } %>
+                </div>
+                
+                <h3 style="margin-top: 40px;">Education</h3>
+                <div class="timeline">
+                    <% if (edu && edu.length > 0) { %>
+                        <% for (let i = 0; i < edu.length; i++) { %>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date"><%= edu[i].edu_dur %></span>
+                                    <h4><%= edu[i].edu_deg %></h4>
+                                    <p class="timeline-company"><%= edu[i].edu_coll %></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p class="text-muted">No education records listed.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

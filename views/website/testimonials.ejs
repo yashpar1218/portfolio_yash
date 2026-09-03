@@ -1,0 +1,38 @@
+<%- include('header.ejs'); %>
+
+<section class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">What Clients Say</h2>
+            <p class="section-desc">Feedback and reviews from people I have collaborated with</p>
+        </div>
+        
+        <div class="testimonial-track">
+            <% if (test && test.length > 0) { %>
+                <% for (let i = 0; i < test.length; i++) { %>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"<%= test[i].ser_des %>"</p>
+                        <div class="testimonial-author">
+                            <h4><%= test[i].ser_ico %></h4>
+                            <span><%= test[i].ser_nam %></span>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <div class="text-center w-100 py-5 text-muted">
+                    <p>No testimonials added yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

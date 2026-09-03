@@ -1,0 +1,94 @@
+<%- include('header.ejs'); %>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="hero" class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <span class="hero-greeting">Hello, I'm</span>
+            <h1><%= hero.name || 'Yash Parkhe' %></h1>
+            <h2><%= hero.role || 'Full Stack Developer' %></h2>
+            <p><%= hero.bio || 'Passionate web developer building high-performance modern web applications.' %></p>
+            
+            <div class="hero-buttons">
+                <a href="/portfolio" class="btn btn-primary">
+                    <i class="fas fa-eye me-1"></i> View My Work
+                </a>
+                <a href="/contact" class="btn btn-secondary">
+                    <i class="fas fa-paper-plane me-1"></i> Let's Talk
+                </a>
+            </div>
+            
+            <div class="hero-social">
+                <% if (siteSocial.github) { %><a href="<%= siteSocial.github %>" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a><% } %>
+                <% if (siteSocial.linkedin) { %><a href="<%= siteSocial.linkedin %>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><% } %>
+                <% if (siteSocial.twitter) { %><a href="<%= siteSocial.twitter %>" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a><% } %>
+                <% if (siteSocial.instagram) { %><a href="<%= siteSocial.instagram %>" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a><% } %>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <% if (hero && hero.pfp) { %>
+                <img src="/<%= hero.pfp %>" alt="<%= hero.name %>" />
+            <% } else { %>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&fit=crop" alt="Profile" />
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES PREVIEW ===== -->
+<% if (services && services.length > 0) { %>
+<section class="services">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Services</span>
+            <h2 class="section-title">What I Offer</h2>
+            <p class="section-desc">Tailored high-quality technical solutions for modern digital products</p>
+        </div>
+        <div class="services-grid">
+            <% services.forEach(item => { %>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="<%= item.ser_ico %>"></i>
+                    </div>
+                    <h3><%= item.ser_nam %></h3>
+                    <p><%= item.ser_des %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<!-- ===== FEATURED PROJECTS PREVIEW ===== -->
+<% if (projects && projects.length > 0) { %>
+<section class="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-desc">Explore a selection of recent web development work</p>
+        </div>
+        <div class="portfolio-grid">
+            <% projects.forEach(item => { %>
+                <div class="portfolio-item" data-category="<%= item.pr_cate %>">
+                    <% if (item.pr_photo) { %>
+                        <img src="/<%= item.pr_photo %>" alt="<%= item.pr_name %>" />
+                    <% } else { %>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&fit=crop" alt="Project" />
+                    <% } %>
+                    <div class="portfolio-overlay">
+                        <h3><%= item.pr_name %></h3>
+                        <p><%= item.pr_cate %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <div class="text-center mt-5" style="text-align: center; margin-top: 40px;">
+            <a href="/portfolio" class="btn btn-secondary">View All Projects →</a>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<%- include('footer.ejs'); %>

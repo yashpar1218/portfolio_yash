@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= siteHero.name || siteAbout.name || 'Yash Parkhe' %> | Full Stack Developer Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="<%= siteHero.name || 'Yash Parkhe' %> - <%= siteHero.role || 'Full Stack Developer' %> Portfolio showcasing modern web development, Express.js apps, and cloud projects." />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/website/sty.css" />
+    <link rel="stylesheet" href="/website/responsive.css" />
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+    
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Navigation Header -->
+    <header id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">
+                    <% 
+                      let nameParts = (siteHero.name || 'Yash Parkhe').trim().split(' ');
+                      let first = nameParts[0] || 'Yash';
+                      let rest = nameParts.slice(1).join(' ') || 'Parkhe';
+                    %>
+                    <%= first %><span><%= rest %></span>
+                </a>
+            </div>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav id="navMenu">
+                <ul>
+                    <li><a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a></li>
+                    <li><a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a></li>
+                    <li><a href="/resume" class="<%= currentPath === '/resume' ? 'active' : '' %>">Resume</a></li>
+                    <li><a href="/services" class="<%= currentPath === '/services' ? 'active' : '' %>">Services</a></li>
+                    <li><a href="/portfolio" class="<%= currentPath === '/portfolio' ? 'active' : '' %>">Portfolio</a></li>
+                    <li><a href="/testimonials" class="<%= currentPath === '/testimonials' ? 'active' : '' %>">Testimonials</a></li>
+                    <li><a href="/blog" class="<%= currentPath === '/blog' ? 'active' : '' %>">Blog</a></li>
+                    <li><a href="/contact" class="<%= currentPath === '/contact' ? 'active' : '' %>">Contact</a></li>
+                </ul>
+                
+                <button id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>

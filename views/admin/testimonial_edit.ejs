@@ -1,0 +1,47 @@
+<%- include('header.ejs') %>
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h3 mb-1">Edit Testimonial</h1>
+        <p class="text-muted small mb-0">Modify client review information</p>
+      </div>
+      <a href="/admin/testimonials_list" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-arrow-left me-1"></i> Back to Testimonials
+      </a>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <form action="/admin/update_testimonial/<%= testimonial.t_id %>" method="post">
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Client Name</label>
+                <input type="text" name="ser_ico" class="form-control" value="<%= testimonial.ser_ico %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Client Role / Company</label>
+                <input type="text" name="ser_nam" class="form-control" value="<%= testimonial.ser_nam %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Review / Feedback</label>
+                <textarea name="ser_des" class="form-control" rows="4" required><%= testimonial.ser_des %></textarea>
+              </div>
+
+              <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="/admin/testimonials_list" class="btn btn-light">Cancel</a>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save me-1"></i> Update Testimonial
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('footer.ejs') %>

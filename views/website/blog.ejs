@@ -1,0 +1,36 @@
+<%- include('header.ejs'); %>
+
+<section class="blog">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Blog</span>
+            <h2 class="section-title">Latest Insights</h2>
+            <p class="section-desc">Articles, tutorials, and thoughts from my software development journey</p>
+        </div>
+        
+        <div class="blog-grid">
+            <% if (blog && blog.length > 0) { %>
+                <% for (let i = 0; i < blog.length; i++) { %>
+                    <article class="blog-card">
+                        <% if (blog[i].post_photo) { %>
+                            <img src="/<%= blog[i].post_photo %>" alt="<%= blog[i].post_name %>" />
+                        <% } else { %>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&fit=crop" alt="Blog" />
+                        <% } %>
+                        <div class="blog-content">
+                            <span class="blog-date"><%= blog[i].date %></span>
+                            <h3><%= blog[i].post_name %></h3>
+                            <p><%= blog[i].post_des %></p>
+                        </div>
+                    </article>
+                <% } %>
+            <% } else { %>
+                <div class="text-center w-100 py-5 text-muted">
+                    <p>No blog posts published yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

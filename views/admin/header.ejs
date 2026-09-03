@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Admin Dashboard</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/admin/style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <i class="fas fa-terminal"></i>
+                <span>Portfolio<span>Admin</span></span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="/admin/dashboard">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-divider">Content Management</li>
+                    
+                    <li class="nav-item">
+                        <a href="#heroMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-star"></i>
+                            <span>Hero Section</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="heroMenu">
+                            <li><a href="/admin/edit_hero">Edit Hero Intro</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#aboutMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-user-tie"></i>
+                            <span>About</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="aboutMenu">
+                            <li><a href="/admin/edit_about">Edit Biography</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#skillsMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-code"></i>
+                            <span>Skills</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="skillsMenu">
+                            <li><a href="/admin/skill_add">Add New Skill</a></li>
+                            <li><a href="/admin/skill_list">Manage Skills</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#expMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Experience</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="expMenu">
+                            <li><a href="/admin/experience_add">Add Experience</a></li>
+                            <li><a href="/admin/experience_list">Manage Experience</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#eduMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Education</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="eduMenu">
+                            <li><a href="/admin/education_add">Add Education</a></li>
+                            <li><a href="/admin/education_list">Manage Education</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#serviceMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>Services</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="serviceMenu">
+                            <li><a href="/admin/service_add">Add Service</a></li>
+                            <li><a href="/admin/service_list">Manage Services</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#portMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Portfolio</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="portMenu">
+                            <li><a href="/admin/project_add">Add New Project</a></li>
+                            <li><a href="/admin/project_manage">Manage Projects</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#blogMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Blog</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="blogMenu">
+                            <li><a href="/admin/blog_add">New Article</a></li>
+                            <li><a href="/admin/blog_manage">Manage Articles</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#testMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-quote-right"></i>
+                            <span>Testimonials</span>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </a>
+                        <ul class="collapse" id="testMenu">
+                            <li><a href="/admin/testimonials_add">Add Testimonial</a></li>
+                            <li><a href="/admin/testimonials_list">Manage Testimonials</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-divider">Communication</li>
+                    
+                    <li class="nav-item">
+                        <a href="#msgMenu" data-bs-toggle="collapse" aria-expanded="false">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Enquiries</span>
+                            <% if (enquiryPendingCount > 0) { %>
+                                <span class="badge bg-warning ms-auto"><%= enquiryPendingCount %></span>
+                            <% } %>
+                        </a>
+                        <ul class="collapse" id="msgMenu">
+                            <li><a href="/admin/enquiries">Pending (<%= enquiryPendingCount %>)</a></li>
+                            <li><a href="/admin/enquiries/accepted">Accepted (<%= enquiryAcceptedCount %>)</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-divider">System</li>
+                    
+                    <li class="nav-item">
+                        <a href="/admin/settings">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/" target="_blank">
+                            <i class="fas fa-external-link-alt text-info"></i>
+                            <span class="text-info">Live Website</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/admin/logout">
+                            <i class="fas fa-sign-out-alt text-danger"></i>
+                            <span class="text-danger">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="navbar-top">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-sm btn-outline-secondary" id="sidebarToggleBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="fw-semibold">Admin Panel</span>
+                </div>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Theme Mode Toggle -->
+                    <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-2" id="themeToggle" title="Toggle Light/Dark Mode">
+                        <i class="fas fa-sun" id="themeIcon"></i>
+                        <span class="d-none d-md-inline small" id="themeLabel">Light Mode</span>
+                    </button>
+
+                    <a href="/admin/enquiries" class="btn btn-sm btn-outline-warning position-relative">
+                        <i class="fas fa-bell"></i>
+                        <% if (enquiryPendingCount > 0) { %>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <%= enquiryPendingCount %>
+                            </span>
+                        <% } %>
+                    </a>
+
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i>
+                            <span><%= username %></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item" href="/admin/settings"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item text-danger" href="/admin/logout"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>

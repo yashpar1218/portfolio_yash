@@ -1,0 +1,62 @@
+<%- include('header.ejs') %>
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h3 mb-1">Manage Technical Skills</h1>
+        <p class="text-muted small mb-0">Overview of your technical proficiency</p>
+      </div>
+      <a href="/admin/skill_add" class="btn btn-primary btn-sm">
+        <i class="fas fa-plus me-1"></i> Add Skill
+      </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Technology</th>
+                <th>Proficiency</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (skill && skill.length > 0) { %>
+                <% for (let i = 0; i < skill.length; i++) { %>
+                  <tr>
+                    <td><%= i + 1 %></td>
+                    <td class="fw-semibold"><%= skill[i].tech_name %></td>
+                    <td>
+                      <div class="d-flex align-items-center gap-2" style="max-width: 200px;">
+                        <div class="progress flex-grow-1" style="height: 8px;">
+                          <div class="progress-bar bg-primary" role="progressbar" style="width: <%= skill[i].tech_per %>%;"></div>
+                        </div>
+                        <span class="small fw-bold"><%= skill[i].tech_per %>%</span>
+                      </div>
+                    </td>
+                    <td class="text-end">
+                      <a href="/admin/edit_skill/<%= skill[i].ts_id %>" class="btn btn-sm btn-outline-warning me-1" title="Edit">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a href="/admin/delete_skill/<%= skill[i].ts_id %>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this skill?')" title="Delete">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <% } %>
+              <% } else { %>
+                <tr>
+                  <td colspan="4" class="text-center py-4 text-muted">No skills found. Add your technical skills!</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('footer.ejs') %>

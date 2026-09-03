@@ -1,0 +1,79 @@
+<%- include('header.ejs'); %>
+
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">About Me</span>
+            <h2 class="section-title">Turning Ideas Into Reality</h2>
+            <p class="section-desc">Learn more about my technical background, expertise, and development philosophy</p>
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-image">
+                <% if (about && about.image) { %>
+                    <img src="/<%= about.image %>" alt="<%= about.name %>" />
+                <% } else { %>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&fit=crop" alt="About" />
+                <% } %>
+                <div class="about-experience-badge">
+                    <span><%= stats ? stats.experience : 1 %>+</span>
+                    Years Experience
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <h3><%= about.role || 'Full Stack Developer' %></h3>
+                <p><%= about.des %></p>
+                
+                <div class="about-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Name:</span>
+                        <span class="info-value"><%= about.name %></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value"><%= about.email %></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value"><%= about.loc %></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Availability:</span>
+                        <span class="info-value text-success font-weight-bold">Available for Hire</span>
+                    </div>
+                </div>
+                
+                <a href="/contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-1"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATISTICS COUNTER ===== -->
+<section class="statistics">
+    <div class="container">
+        <div class="stat-grid">
+            <div class="stat-item">
+                <span class="stat-number"><%= stats ? stats.projects : 20 %></span>
+                <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><%= stats ? stats.skills : 10 %></span>
+                <span class="stat-label">Technical Skills</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><%= stats ? stats.clients : 15 %></span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><%= stats ? stats.experience : 1 %>+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

@@ -1,0 +1,30 @@
+{
+  "name": "portfolio_yash",
+  "version": "1.0.0",
+  "description": "Personal Portfolio app",
+  "homepage": "https://github.com/yashpar1218/portfolio_yash#readme",
+  "bugs": {
+    "url": "https://github.com/yashpar1218/portfolio_yash/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yashpar1218/portfolio_yash.git"
+  },
+  "license": "ISC",
+  "author": "Yash Parkhe",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-fileupload": "^1.5.2",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.22.6"
+  },
+  "devDependencies": {}
+}

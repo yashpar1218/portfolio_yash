@@ -1,0 +1,89 @@
+<%- include('header.ejs'); %>
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Contact</span>
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-desc">Have a project in mind or want to collaborate? Send me a message below!</p>
+        </div>
+        
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Location</h4>
+                        <p><%= contact ? contact.address : 'Ahilyanagar, Maharashtra' %></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email Address</h4>
+                        <p><%= contact ? contact.email : 'yash@gmail.com' %></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Phone Number</h4>
+                        <p><%= contact ? contact.phone : '+91 9130276034' %></p>
+                    </div>
+                </div>
+                
+                <% if (contact && contact.map) { %>
+                    <div class="map-placeholder mt-4">
+                        <iframe 
+                            src="<%= contact.map %>" 
+                            width="100%" 
+                            height="220" 
+                            style="border:0; border-radius: var(--radius-md);" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                <% } %>
+            </div>
+            
+            <div class="contact-form-container">
+                <% if (successMessage) { %>
+                    <div class="alert-success mb-3"><%= successMessage %></div>
+                <% } %>
+                
+                <form action="/contact_submit" method="post" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required />
+                        <span class="error-message" id="nameError">Please enter your name</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                        <span class="error-message" id="emailError">Please enter a valid email</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Project Inquiry" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project requirements..." required></textarea>
+                        <span class="error-message" id="messageError">Please enter your message</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-paper-plane me-2"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

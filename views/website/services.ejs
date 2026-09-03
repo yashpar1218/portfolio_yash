@@ -1,0 +1,31 @@
+<%- include('header.ejs'); %>
+
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Services</span>
+            <h2 class="section-title">What I Offer</h2>
+            <p class="section-desc">Expert solutions tailored to bring your digital visions and product requirements to life</p>
+        </div>
+        
+        <div class="services-grid">
+            <% if (service && service.length > 0) { %>
+                <% for (let i = 0; i < service.length; i++) { %>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="<%= service[i].ser_ico %>"></i>
+                        </div>
+                        <h3><%= service[i].ser_nam %></h3>
+                        <p><%= service[i].ser_des %></p>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <div class="text-center w-100 py-5 text-muted">
+                    <p>No services listed yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<%- include('footer.ejs'); %>

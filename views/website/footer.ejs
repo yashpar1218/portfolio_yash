@@ -1,0 +1,39 @@
+<footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <% 
+                      let nameParts = (siteHero.name || 'Yash Parkhe').trim().split(' ');
+                      let first = nameParts[0] || 'Yash';
+                      let rest = nameParts.slice(1).join(' ') || 'Parkhe';
+                    %>
+                    <h3><%= first %><span><%= rest %></span></h3>
+                    <p><%= siteHero.role || 'Full Stack Developer & Software Engineer' %></p>
+                </div>
+                <div class="footer-social">
+                    <div class="social-links">
+                        <% if (siteSocial.github) { %><a href="<%= siteSocial.github %>" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a><% } %>
+                        <% if (siteSocial.linkedin) { %><a href="<%= siteSocial.linkedin %>" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><% } %>
+                        <% if (siteSocial.twitter) { %><a href="<%= siteSocial.twitter %>" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a><% } %>
+                        <% if (siteSocial.instagram) { %><a href="<%= siteSocial.instagram %>" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a><% } %>
+                        <% if (siteSocial.facebook) { %><a href="<%= siteSocial.facebook %>" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><% } %>
+                        <% if (siteSocial.youtube) { %><a href="<%= siteSocial.youtube %>" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a><% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <%= new Date().getFullYear() %> <%= siteHero.name || 'Yash Parkhe' %>. All rights reserved. | Built with <i class="fas fa-heart" style="color: #ef4444;"></i> using Node.js & Express</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged project view" />
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="/website/script.js"></script>
+</body>
+</html>
