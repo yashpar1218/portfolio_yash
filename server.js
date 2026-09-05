@@ -43,16 +43,6 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
-}).on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        const fallbackPort = 3001;
-        console.log(`Port ${PORT} is busy. Trying ${fallbackPort}...`);
-        app.listen(fallbackPort, () => {
-            console.log(`Server running on port ${fallbackPort}`);
-        });
-    } else {
-        console.error(err);
-    }
 });
