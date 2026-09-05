@@ -42,10 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Navigation Drawer Toggle
     const mobileToggle = document.getElementById('mobileToggle');
     const navMenu = document.getElementById('navMenu');
-    mobileToggle?.addEventListener('click', () => {
-        mobileToggle.classList.toggle('active');
-        navMenu?.classList.toggle('active');
-    });
+    if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
 
     // Back to Top Button
     const backToTop = document.getElementById('back-to-top');

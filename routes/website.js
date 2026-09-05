@@ -34,11 +34,11 @@ router.get('/', async (req, res) => {
     try {
         const hero = (await exe(`SELECT * FROM hero LIMIT 1`))[0] || {};
         const about = (await exe(`SELECT * FROM about LIMIT 1`))[0] || {};
-        const skills = await exe(`SELECT * FROM technical_skills LIMIT 6`);
-        const services = await exe(`SELECT * FROM service LIMIT 4`);
-        const projects = await exe(`SELECT * FROM project LIMIT 6`);
-        const testimonials = await exe(`SELECT * FROM testimonial LIMIT 5`);
-        const blogs = await exe(`SELECT * FROM blog LIMIT 3`);
+        const skills = (await exe(`SELECT * FROM technical_skills LIMIT 6`)) || [];
+        const services = (await exe(`SELECT * FROM service LIMIT 4`)) || [];
+        const projects = (await exe(`SELECT * FROM project LIMIT 6`)) || [];
+        const testimonials = (await exe(`SELECT * FROM testimonial LIMIT 5`)) || [];
+        const blogs = (await exe(`SELECT * FROM blog LIMIT 3`)) || [];
         
         res.render('website/index', {
             hero,
@@ -50,8 +50,16 @@ router.get('/', async (req, res) => {
             blogs
         });
     } catch (err) {
-        console.error('Home route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Home route error:', err.message);
+        res.render('website/index', {
+            hero: res.locals.siteHero || {},
+            about: res.locals.siteAbout || {},
+            skills: [],
+            services: [],
+            projects: [],
+            testimonials: [],
+            blogs: []
+        });
     }
 });
 
@@ -73,67 +81,69 @@ router.get('/about', async (req, res) => {
             }
         });
     } catch (err) {
-        console.error('About route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('About route error:', err.message);
+        res.render('website/about', {
+            about: res.locals.siteAbout || {},
+            stats: { projects: 0, skills: 0, experience: 1, clients: 15 }
+        });
     }
 });
 
 // Resume Page
 router.get('/resume', async (req, res) => {
     try {
-        const skill = await exe(`SELECT * FROM technical_skills ORDER BY ts_id ASC`);
-        const experience = await exe(`SELECT * FROM experience ORDER BY eid DESC`);
-        const edu = await exe(`SELECT * FROM education ORDER BY edu_id DESC`);
+        const skill = (await exe(`SELECT * FROM technical_skills ORDER BY ts_id ASC`)) || [];
+        const experience = (await exe(`SELECT * FROM experience ORDER BY eid DESC`)) || [];
+        const edu = (await exe(`SELECT * FROM education ORDER BY edu_id DESC`)) || [];
         res.render('website/resume', { skill, experience, edu });
     } catch (err) {
-        console.error('Resume route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Resume route error:', err.message);
+        res.render('website/resume', { skill: [], experience: [], edu: [] });
     }
 });
 
 // Services Page
 router.get('/services', async (req, res) => {
     try {
-        const service = await exe(`SELECT * FROM service ORDER BY ser_id ASC`);
+        const service = (await exe(`SELECT * FROM service ORDER BY ser_id ASC`)) || [];
         res.render('website/services', { service });
     } catch (err) {
-        console.error('Services route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Services route error:', err.message);
+        res.render('website/services', { service: [] });
     }
 });
 
 // Testimonials Page
 router.get('/testimonials', async (req, res) => {
     try {
-        const test = await exe(`SELECT * FROM testimonial ORDER BY t_id DESC`);
+        const test = (await exe(`SELECT * FROM testimonial ORDER BY t_id DESC`)) || [];
         res.render('website/testimonials', { test });
     } catch (err) {
-        console.error('Testimonials route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Testimonials route error:', err.message);
+        res.render('website/testimonials', { test: [] });
     }
 });
 
 // Portfolio Page
 router.get('/portfolio', async (req, res) => {
     try {
-        const port = await exe(`SELECT * FROM project ORDER BY pr_id DESC`);
-        // Get unique categories for filter tabs
+        const port = (await exe(`SELECT * FROM project ORDER BY pr_id DESC`)) || [];
         const categories = [...new Set(port.map(p => p.pr_cate).filter(Boolean))];
         res.render('website/portfolio', { port, categories });
     } catch (err) {
-        console.error('Portfolio route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Portfolio route error:', err.message);
+        res.render('website/portfolio', { port: [], categories: [] });
     }
 });
 
 // Blog Page
 router.get('/blog', async (req, res) => {
     try {
-        const blog = await exe(`SELECT * FROM blog ORDER BY b_id DESC`);
+        const blog = (await exe(`SELECT * FROM blog ORDER BY b_id DESC`)) || [];
         res.render('website/blog', { blog });
     } catch (err) {
-        console.error('Blog route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Blog route error:', err.message);
+        res.render('website/blog', { blog: [] });
     }
 });
 
@@ -144,8 +154,8 @@ router.get('/contact', async (req, res) => {
         const successMessage = req.query.submitted ? 'Thank you! Your enquiry has been received successfully. We will respond shortly.' : null;
         res.render('website/contact', { contact, successMessage });
     } catch (err) {
-        console.error('Contact route error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Contact route error:', err.message);
+        res.render('website/contact', { contact: res.locals.siteContact || {}, successMessage: null });
     }
 });
 

@@ -30,7 +30,16 @@ app.use('/admin', adminrouter);
 
 // 404 Handler
 app.use((req, res) => {
-    res.status(404).render('website/index', { error: 'Page not found' });
+    res.status(404).render('website/index', {
+        hero: res.locals.siteHero || {},
+        about: res.locals.siteAbout || {},
+        skills: [],
+        services: [],
+        projects: [],
+        testimonials: [],
+        blogs: [],
+        error: 'Page not found'
+    });
 });
 
 const PORT = process.env.PORT || 3000;

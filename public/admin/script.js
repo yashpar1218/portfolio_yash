@@ -1,18 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
     
-    // Sidebar Toggle
+    // Sidebar Toggle (Desktop & Mobile)
     const sidebar = document.getElementById('sidebar');
     const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+
+    // Create backdrop element for mobile
+    let backdrop = document.querySelector('.sidebar-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'sidebar-backdrop';
+        document.body.appendChild(backdrop);
+    }
     
     if (sidebarToggleBtn && sidebar) {
-        sidebarToggleBtn.addEventListener('click', function() {
-            sidebar.classList.toggle('collapsed');
-            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+        sidebarToggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (window.innerWidth <= 991) {
+                sidebar.classList.toggle('show');
+                backdrop.classList.toggle('show');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+            }
         });
     }
 
-    if (localStorage.getItem('sidebarCollapsed') === 'true' && sidebar) {
+    if (backdrop) {
+        backdrop.addEventListener('click', function() {
+            if (sidebar) sidebar.classList.remove('show');
+            backdrop.classList.remove('show');
+        });
+    }
+
+    if (sidebar) {
+        sidebar.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 991) {
+                    sidebar.classList.remove('show');
+                    if (backdrop) backdrop.classList.remove('show');
+                }
+            });
+        });
+    }
+
+    if (window.innerWidth > 991 && localStorage.getItem('sidebarCollapsed') === 'true' && sidebar) {
         sidebar.classList.add('collapsed');
     }
 

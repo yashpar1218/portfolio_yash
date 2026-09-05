@@ -329,3 +329,78 @@ a {
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+
+/* Sidebar Collapsed State (Desktop) */
+@media (min-width: 992px) {
+    .sidebar.collapsed {
+        width: var(--sidebar-collapsed);
+    }
+
+    .sidebar.collapsed .sidebar-brand span,
+    .sidebar.collapsed .sidebar-nav .nav-item > a span,
+    .sidebar.collapsed .nav-divider,
+    .sidebar.collapsed .sidebar-nav .nav-item > a .fa-chevron-down,
+    .sidebar.collapsed .sidebar-nav .nav-item > a .badge {
+        display: none !important;
+    }
+
+    .sidebar.collapsed .sidebar-nav .nav-item > a {
+        justify-content: center;
+        padding: 14px 0;
+    }
+
+    .sidebar.collapsed .sidebar-nav .nav-item ul {
+        display: none !important;
+    }
+
+    .sidebar.collapsed ~ .main-content,
+    .sidebar.collapsed + .main-content {
+        margin-left: var(--sidebar-collapsed);
+    }
+}
+
+/* Sidebar Backdrop (Mobile) */
+.sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1045;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 991px) {
+    .sidebar {
+        left: -260px;
+        z-index: 1050;
+    }
+
+    .sidebar.show,
+    .sidebar.active {
+        left: 0;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+
+    .navbar-top {
+        padding: 0 16px;
+    }
+
+    .page-content {
+        padding: 20px 15px;
+    }
+}

@@ -84,8 +84,8 @@ router.get('/dashboard', async (req, res) => {
         const skillCount = (await exe(`SELECT COUNT(*) as count FROM technical_skills`))[0]?.count || 0;
         const pendingEnquiries = (await exe(`SELECT COUNT(*) as count FROM enquiries WHERE status='pending'`))[0]?.count || 0;
         
-        const recentEnquiries = await exe(`SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 5`);
-        const recentProjects = await exe(`SELECT * FROM project ORDER BY pr_id DESC LIMIT 5`);
+        const recentEnquiries = (await exe(`SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 5`)) || [];
+        const recentProjects = (await exe(`SELECT * FROM project ORDER BY pr_id DESC LIMIT 5`)) || [];
 
         res.render('admin/dashboard', {
             projectCount,
@@ -96,8 +96,15 @@ router.get('/dashboard', async (req, res) => {
             recentProjects
         });
     } catch (err) {
-        console.error('Dashboard error:', err);
-        res.status(500).send('Internal Server Error');
+        console.error('Dashboard error:', err.message);
+        res.render('admin/dashboard', {
+            projectCount: 0,
+            blogCount: 0,
+            skillCount: 0,
+            pendingEnquiries: 0,
+            recentEnquiries: [],
+            recentProjects: []
+        });
     }
 });
 
